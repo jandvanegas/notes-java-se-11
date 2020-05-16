@@ -87,5 +87,74 @@ class SomeClass //class declaration
 	* . tells the ocmpiler that the current directory is the target directory for the resulting output.
 * To run you can use `java -classpath . packagename.ClassName`
 	* classpath specify where your classes are located. You can specify may locations. 
-* Location  is the location of the directory structure of teh class file. 
+* Location  is the location of the directory structure of the class file. 
+
+#### Compiling multiple sourcefiles at once
+
+* If you have two classes whre one class depends on the other, you need to compile the source file for theindependent class first and the source file for the dependent class later. 
+* It is impractical to determine the sequence of compilation of the source files manually.
+* Let the compiler figure out the dependencies by specifying all the source files that you want to compileat once with: 
+
+`javac -d . A.java B.java`
+
+or
+
+`javac -d . *.java`
+
+* if your java source files refer to some preexisting class files that are stored in another directory. use `javac -classpath`
+
+### 1.8.2 Running a single file source 
+* You can execute a java main class with `java TestClass.java` 
+* Your Java code must not refer to code in any other Java file. 
+* You can have as many classes in the file as you want but the first class that apperars in thefile must contain the main method.
+* If you see `error: compilation failed` in the console, it is a compilation erro, otherwis, it is an exception durion execution.
+
+### 1.8.3 Packaging classes into Jar
+* "Java Archive is a veru much like a zip file but with an extension of jar.
+* If you want and structure like this:
+
+![](image_1.png)
+
+within javatest folder  run `jar -cvf accounting.jar accounting`. It tells he jar utility to create accounting.jar file and include the entire directory named accounting in it along with its internal files and directories. You will get this:
+
+
+![](image_2.png)
+
+You can now run the Account class through `java -classpath ./accounting.jar accounting.Account`
+
+* Jar file allows you to keep information about the contents of the jar file within the jar file itself.
+* This information is kepr in the file MANIFEST.MF inside the folder META-INF.
+* You can create mymanifest.txt with `jar -cvfm accounting.jar mymanifest.txt accounting`
+	* c create
+	* v verbose
+	* f outputfile
+	* m name of the file the contents of which have to be included in the jar's manifest.
+
+### 1.8.4 Compilation error vs exception at run time.
+Key points for the exam to avoid confusion
+* The compiler's job is to check whether the code folloes the syntactical rules of the language.
+* The compiler wants to make sure that the code is logically correct. It can catch some of the errors but not all. Example: `byte b = 200` is not correct for the compiler, but `int i = 10/0` is.
+* JVM is the ultimate guard. Unlike the compiler, the JVM knows about everything that te code tries to do an it throws an Exception as soos as it determines that the action may damage the integrity or the the type safety of the JVM. 
+
+## 1.9 Nomenclature
+### 1.9.1 Commonly used terms in Java development
+* Class -> class, interface, enum.
+* Type -> classes, interfces, enums, and also primitive types.
+* Primitive types -> byte,char,short,int,long,float,double,boolean
+* Reference types -> Classes, Interfaces, Enums
+* Top-level reference types 0> Classes, interfaces or enums defines directly under a package
+* Nested reference types -> Classes, interfaces and enums defines inside anotherclass, interface, or enum
+* Inner reference types -> non static nested classes, interfces and enums
+* Local reference types -> nestedreference types that are defined inside amethod.
+* Anonymous classes -> just the class definition is present, and the complete declaration is automatically inferred by the compiler. It is never static.
+* Compile time vs run time
+* Compille-time constants -> constants that the compiler knows because they are never going to change.
+
+## 1.10 Java Identifiers
+### 1.10.1 Java Identifiers.
+* Names to identify objects, variables, etc.
+* Identifier is an unlimited-length sequence of Javaletters and Java digits.
+* An idetifier cannot have the same spelling as a Java keyword or literal.
+
+
 
